@@ -1,1 +1,3 @@
-# places-webtech-backend
+Team Jonathan und Keanu
+
+Wir bauen eine Webanwendung ...
