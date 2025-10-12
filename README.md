@@ -2,6 +2,7 @@
 
 ## Places
 
+[!NOTE]
 Wir bauen eine Webanwendung, mit der Nutzer Orte, Sehenswürdigkeiten oder besondere Plätze, die sie besucht haben, mit der Community teilen können.
 
 
