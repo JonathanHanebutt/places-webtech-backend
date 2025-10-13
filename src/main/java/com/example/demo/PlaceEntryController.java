@@ -9,6 +9,6 @@ public class PlaceEntryController {
 
     @GetMapping("/places")
     public String allPlaces() {
-        return "All places";
+        return "B-)";
     }
 }
