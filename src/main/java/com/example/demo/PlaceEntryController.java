@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class PlaceEntryController {
 
-    @GetMapping
+    @GetMapping("/places")
     public String allPlaces() {
         return "All places";
     }
