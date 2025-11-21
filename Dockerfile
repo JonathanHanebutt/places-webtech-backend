@@ -1,5 +1,5 @@
 # --- Build Stage ---
-FROM eclipse-temurin:17-jdk AS build
+FROM eclipse-temurin:25-jdk AS build
 WORKDIR /app
 
 # Projekt rein kopieren
@@ -12,7 +12,7 @@ RUN chmod +x gradlew
 RUN ./gradlew bootJar -x test --no-daemon
 
 # --- Run Stage ---
-FROM eclipse-temurin:17-jre
+FROM eclipse-temurin:25-jre
 WORKDIR /app
 
 # Gebautes JAR aus dem Build-Container holen
