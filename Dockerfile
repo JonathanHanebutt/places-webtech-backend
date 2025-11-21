@@ -1,20 +1,11 @@
-# --- Build Stage ---
-FROM eclipse-temurin:17-jdk AS build
+FROM gradle:8.5-jdk17 AS build
 WORKDIR /app
-
-# Gradle ausführen
 COPY . .
-RUN chmod +x gradlew
-RUN ./gradlew bootJar
+RUN gradle bootJar
 
-# --- Run Stage ---
 FROM eclipse-temurin:17-jre
 WORKDIR /app
-
 COPY --from=build /app/build/libs/*.jar app.jar
-
-# Render expects the app to listen on PORT (default: 10000)
-ENV PORT=10000
-EXPOSE 10000
-
+EXPOSE 8080
 CMD ["java", "-jar", "app.jar"]
+
