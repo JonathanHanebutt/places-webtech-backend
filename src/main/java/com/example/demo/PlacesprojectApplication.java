@@ -14,38 +14,37 @@ public class PlacesprojectApplication {
         SpringApplication.run(PlacesprojectApplication.class, args);
     }
 
-    // Wird beim Start einmal ausgeführt
     @Bean
     CommandLineRunner initDatabase(PlaceEntryRepository repo) {
         return args -> {
-            if (repo.count() == 0) {
-                repo.saveAll(List.of(
-                        new PlaceEntry(
-                                "HTW Berlin",
-                                "Campus Wilhelminenhof an der Spree",
-                                5,
-                                42,
-                                1,
-                                "/images/campus-wilhelminenhof.jpg"
-                        ),
-                        new PlaceEntry(
-                                "Tempelhofer Feld",
-                                "Ehemaliger Flughafen, heute Freizeitfläche",
-                                4,
-                                30,
-                                2,
-                                "/images/tempelhoferfeld.jpg"
-                        ),
-                        new PlaceEntry(
-                                "Tiergarten",
-                                "Großer Park im Herzen von Berlin",
-                                5,
-                                60,
-                                3,
-                                "/images/Tiergarten.jpeg"
-                        )
+
+            if (!repo.existsByName("HTW Berlin")) {
+                repo.save(new PlaceEntry(
+                        "HTW Berlin",
+                        "Campus Wilhelminenhof an der Spree",
+                        5, 42, 1,
+                        "/images/campus-wilhelminenhof.jpg"
+                ));
+            }
+
+            if (!repo.existsByName("Tempelhofer Feld")) {
+                repo.save(new PlaceEntry(
+                        "Tempelhofer Feld",
+                        "Ehemaliger Flughafen, heute Freizeitfläche",
+                        4, 30, 2,
+                        "/images/tempelhoferfeld.jpg"
+                ));
+            }
+
+            if (!repo.existsByName("Tiergarten")) {
+                repo.save(new PlaceEntry(
+                        "Tiergarten",
+                        "Großer Park im Herzen von Berlin",
+                        5, 60, 3,
+                        "/images/Tiergarten.jpeg"
                 ));
             }
         };
     }
+
 }
