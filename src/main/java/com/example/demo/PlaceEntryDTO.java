@@ -1,43 +1,28 @@
 package com.example.demo;
 
-import com.example.demo.auth.AppUser;
-import jakarta.persistence.*;
+public class PlaceEntryDTO {
 
-@Entity
-public class PlaceEntry {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String name;
     private String description;
     private int rating;
     private int likeCount;
     private int dislikeCount;
     private String imageLink;
+    private String username;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private AppUser user;
-
-    public PlaceEntry() {
+    public PlaceEntryDTO() {
     }
 
-    public PlaceEntry(
-            String name,
-            String description,
-            int rating,
-            int likeCount,
-            int dislikeCount,
-            String imageLink
-    ) {
-        this.name = name;
-        this.description = description;
-        this.rating = rating;
-        this.likeCount = likeCount;
-        this.dislikeCount = dislikeCount;
-        this.imageLink = imageLink;
+    public PlaceEntryDTO(PlaceEntry place) {
+        this.id = place.getId();
+        this.name = place.getName();
+        this.description = place.getDescription();
+        this.rating = place.getRating();
+        this.likeCount = place.getLikeCount();
+        this.dislikeCount = place.getDislikeCount();
+        this.imageLink = place.getImageLink();
+        this.username = place.getUser() != null ? place.getUser().getUsername() : null;
     }
 
     public Long getId() { return id; }
@@ -47,7 +32,7 @@ public class PlaceEntry {
     public int getLikeCount() { return likeCount; }
     public int getDislikeCount() { return dislikeCount; }
     public String getImageLink() { return imageLink; }
-    public AppUser getUser() { return user; }
+    public String getUsername() { return username; }
 
     public void setId(Long id) { this.id = id; }
     public void setName(String name) { this.name = name; }
@@ -56,5 +41,6 @@ public class PlaceEntry {
     public void setLikeCount(int likeCount) { this.likeCount = likeCount; }
     public void setDislikeCount(int dislikeCount) { this.dislikeCount = dislikeCount; }
     public void setImageLink(String imageLink) { this.imageLink = imageLink; }
-    public void setUser(AppUser user) { this.user = user; }
+    public void setUsername(String username) { this.username = username; }
 }
+

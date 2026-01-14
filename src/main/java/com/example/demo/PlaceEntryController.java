@@ -1,6 +1,8 @@
 package com.example.demo;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,25 +20,26 @@ public class PlaceEntryController {
 
     // GET /places -> alle Einträge aus DB
     @GetMapping("/places")
-    public List<PlaceEntry> allPlaces() {
+    public List<PlaceEntryDTO> allPlaces() {
         return service.getAll();
     }
 
-    // POST /places -> neuen Ort anlegen
+    // POST /places -> neuen Ort anlegen (requires authentication)
     @PostMapping("/places")
-    public PlaceEntry createPlace(@RequestBody PlaceEntry place) {
-        return service.create(place);
+    public PlaceEntryDTO createPlace(@RequestBody PlaceEntry place,
+                                     @AuthenticationPrincipal UserDetails userDetails) {
+        return service.create(place, userDetails.getUsername());
     }
 
     // POST /places/{id}/like -> Like zählen
     @PostMapping("/places/{id}/like")
-    public PlaceEntry like(@PathVariable Long id) {
+    public PlaceEntryDTO like(@PathVariable Long id) {
         return service.like(id);
     }
 
     // POST /places/{id}/dislike -> Dislike zählen
     @PostMapping("/places/{id}/dislike")
-    public PlaceEntry dislike(@PathVariable Long id) {
+    public PlaceEntryDTO dislike(@PathVariable Long id) {
         return service.dislike(id);
     }
 }
