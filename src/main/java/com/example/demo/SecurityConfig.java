@@ -62,6 +62,8 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/api/comments/**").authenticated()
                         .requestMatchers(HttpMethod.PUT, "/api/comments/**").authenticated()
                         .requestMatchers(HttpMethod.DELETE, "/api/comments/**").authenticated()
+                        // Favorites - all require authentication
+                        .requestMatchers("/api/favorites/**").authenticated()
                         .anyRequest().permitAll()
                 )
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
